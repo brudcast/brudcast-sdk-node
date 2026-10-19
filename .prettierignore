@@ -3,3 +3,4 @@ coverage
 CHANGELOG.md
 package-lock.json
 tests/fixtures/api-key-routes.json
+.release-please-manifest.json
