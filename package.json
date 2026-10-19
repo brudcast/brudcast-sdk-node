@@ -1,6 +1,6 @@
 {
   "name": "@brudcast/node",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The official Node.js library for the Brudcast API",
   "license": "MIT",
   "author": "Brudcast Limited",
