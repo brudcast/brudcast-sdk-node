@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/brudcast/brudcast-sdk-node/compare/v0.1.1...v0.1.2) (2026-10-19)
+
+
+### Bug Fixes
+
+* **readme:** describe only the channels and reports the public docs cover ([c3881fd](https://github.com/brudcast/brudcast-sdk-node/commit/c3881fd00d06f89371c8587fdf1ff3e4f6a1fdeb))
+
 ## [0.1.1](https://github.com/brudcast/brudcast-sdk-node/compare/v0.1.0...v0.1.1) (2026-10-19)
 
 
