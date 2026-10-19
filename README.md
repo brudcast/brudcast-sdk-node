@@ -5,16 +5,17 @@
 The official server-side library for the [Brudcast](https://brudcast.com) API.
 Everything your organization does in the Brudcast dashboard, from your own code:
 
-- **Audience**: contacts on six channels, lists, rule-based segments, tags,
-  custom fields, CSV imports and exports, consent records and suppressions.
-- **Campaigns**: email, SMS, WhatsApp, push, voice and in-app, with A/B tests,
-  readiness checks, credit estimates, scheduling, previews and test sends.
-- **Transactional messaging**: email through the send API, in-app messages, and
-  the delivery log of every email, SMS and voice call.
+- **Audience**: contacts with every channel they can be reached on, lists,
+  rule-based segments, tags, custom fields, CSV imports and exports, consent
+  records and suppressions.
+- **Campaigns**: email, SMS and push, with A/B tests, readiness checks, credit
+  estimates, scheduling, previews and test sends.
+- **Transactional messaging**: email through the send API, and the delivery log
+  of every email and SMS.
 - **Analytics**: campaign reports, engagement, deliverability, channel
-  performance, revenue attribution, bounce classification and report exports.
+  performance, bounce classification and report exports.
 - **Sending setup**: sending domains with DNS and DKIM checks, dedicated IP
-  pools, sender identities, push and in-app applications, WhatsApp accounts and
+  pools, sender identities, push applications, WhatsApp business numbers and
   templates, and hosted mailboxes.
 - **Forms**: signup forms and pages, their fields, submissions, popup
   placements, websites and the preference center.
@@ -72,22 +73,22 @@ would expose your key.
 Every endpoint an organization API key can reach has a method. Each area needs
 its `read` scope to read and its `write` scope to change.
 
-| Area                | Client properties                                                       | Highlights                                                                                                                                                                                                             | Scopes             |
-| ------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| Contacts            | `contacts`                                                              | create, update, bulk create, delete, archive and add to list; activity timeline; statistics; `emails`, `sms`, `whatsapp`, `telegram`, `imessage` and `pushNotifications` channels; `consentRecords`; `inAppIdentities` | `contacts`         |
-| Audiences           | `contactLists`, `contactSegments`, `contactTags`, `contactCustomFields` | list membership and bulk operations; dynamic and static segments with preview counts, snapshots and refresh                                                                                                            | `contacts`         |
-| Imports and exports | `contactImports`, `contactExports`                                      | CSV upload with suggested mappings, dry-run preview, error report; exports with a download link                                                                                                                        | `contacts`         |
-| Suppressions        | `suppressions`                                                          | add, list and lift suppressed addresses                                                                                                                                                                                | `contacts`         |
-| Campaigns           | `campaigns`, `campaigns.reports`                                        | six channels, A/B tests, recipient estimates, readiness, credit estimate, send or schedule, pause, resume, cancel, duplicate, preview, test send; statistics, journeys, voice answers, trends and performance          | `campaigns`        |
-| Templates           | `templates`, `whatsapp.templates`                                       | reusable content with placeholders, resolve, duplicate; approved WhatsApp templates                                                                                                                                    | `templates`        |
-| Transactional       | `emails`, `inApp.messages`, `messages`                                  | send email (sending key) and in-app messages; delivery logs for email, SMS and voice                                                                                                                                   | `messages`         |
-| Analytics           | `reports`, `reports.exports`, `dashboard`                               | overview, engagement, deliverability, channel performance, revenue attribution, bounce classification; CSV and PDF exports                                                                                             | `analytics`        |
-| Webhooks            | `webhookEndpoints`, `webhookDeliveries`                                 | endpoints, test events, secret rotation, delivery log and retry                                                                                                                                                        | `webhooks`         |
-| Sending domains     | `sendingDomains`, `ipPools`, `ipPoolRequests`                           | DNS records and verification, DKIM, tracking settings; dedicated IP pools and requests                                                                                                                                 | `domains`          |
-| Senders and apps    | `senderIdentities`, `pushApplications`, `inAppApplications`, `whatsapp` | sender addresses, SMS sender IDs and their coverage; push apps with credential rotation and test sends; in-app apps with key and secret rotation; WhatsApp accounts and numbers                                        | `senders`          |
-| Mailboxes           | `mailboxDomains`, `mailboxes`                                           | mail domains, mailboxes, aliases, password resets, suspension                                                                                                                                                          | `mailboxes`        |
-| Forms               | `contactForms`, `websites`, `preferenceCenter`                          | forms and pages, fields, publish, analytics, popup placements, websites, preference center settings                                                                                                                    | `forms`            |
-| Form submissions    | `contactForms.submissions`, `contactForms.uploads`                      | submit from your server, list, resend confirmation, download uploads                                                                                                                                                   | `form_submissions` |
+| Area                | Client properties                                                       | Highlights                                                                                                                                                                                            | Scopes             |
+| ------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| Contacts            | `contacts`                                                              | create, update, bulk create, delete, archive and add to list; activity timeline; statistics; `emails`, `sms`, `whatsapp`, `telegram`, `imessage` and `pushNotifications` channels; `consentRecords`   | `contacts`         |
+| Audiences           | `contactLists`, `contactSegments`, `contactTags`, `contactCustomFields` | list membership and bulk operations; dynamic and static segments with preview counts, snapshots and refresh                                                                                           | `contacts`         |
+| Imports and exports | `contactImports`, `contactExports`                                      | CSV upload with suggested mappings, dry-run preview, error report; exports with a download link                                                                                                       | `contacts`         |
+| Suppressions        | `suppressions`                                                          | add, list and lift suppressed addresses                                                                                                                                                               | `contacts`         |
+| Campaigns           | `campaigns`, `campaigns.reports`                                        | email, SMS and push; A/B tests, recipient estimates, readiness, credit estimate, send or schedule, pause, resume, cancel, duplicate, preview, test send; statistics, journeys, trends and performance | `campaigns`        |
+| Templates           | `templates`, `whatsapp.templates`                                       | reusable content with placeholders, resolve, duplicate; approved WhatsApp templates                                                                                                                   | `templates`        |
+| Transactional       | `emails`, `messages`                                                    | send email (sending key); delivery logs for email and SMS                                                                                                                                             | `messages`         |
+| Analytics           | `reports`, `reports.exports`, `dashboard`                               | overview, engagement, deliverability, channel performance, bounce classification; CSV and PDF exports                                                                                                 | `analytics`        |
+| Webhooks            | `webhookEndpoints`, `webhookDeliveries`                                 | endpoints, test events, secret rotation, delivery log and retry                                                                                                                                       | `webhooks`         |
+| Sending domains     | `sendingDomains`, `ipPools`, `ipPoolRequests`                           | DNS records and verification, DKIM, tracking settings; dedicated IP pools and requests                                                                                                                | `domains`          |
+| Senders and apps    | `senderIdentities`, `pushApplications`, `whatsapp`                      | sender addresses, SMS sender IDs and their coverage; push apps with credential rotation and test sends; WhatsApp business numbers and templates                                                       | `senders`          |
+| Mailboxes           | `mailboxDomains`, `mailboxes`                                           | mail domains, mailboxes, aliases, password resets, suspension                                                                                                                                         | `mailboxes`        |
+| Forms               | `contactForms`, `websites`, `preferenceCenter`                          | forms and pages, fields, publish, analytics, popup placements, websites, preference center settings                                                                                                   | `forms`            |
+| Form submissions    | `contactForms.submissions`, `contactForms.uploads`                      | submit from your server, list, resend confirmation, download uploads                                                                                                                                  | `form_submissions` |
 
 ## A tour
 
@@ -224,7 +225,7 @@ console.log(
 );
 ```
 
-### Transactional email, in-app messages and delivery logs
+### Transactional email and delivery logs
 
 ```ts
 const { jobId } = await brudcast.emails.send(
@@ -246,13 +247,6 @@ for await (const sms of brudcast.messages.list({
 })) {
   console.log(sms.recipient.maskedNumber, sms.category);
 }
-
-await brudcast.inApp.messages.send({
-  applicationId,
-  externalId: 'user_123',
-  templateId,
-  mergeData: { firstName: 'Ada' },
-});
 ```
 
 Pass an `idempotencyKey` you store with the message: if your process crashes or
@@ -295,7 +289,7 @@ await brudcast.contactForms.submissions.create(formId, {
 ```ts
 const endpoint = await brudcast.webhookEndpoints.create({
   url: 'https://acme.com/webhooks/brudcast',
-  events: ['push.token_invalidated', 'voice.call.completed'],
+  events: ['push.token_invalidated'],
 });
 console.log('store this secret:', endpoint.secret);
 

@@ -142,10 +142,8 @@ export async function reporting(campaignId: string) {
  * Transactional messages
  *
  * @param orderId - Your order
- * @param applicationId - An in-app application
- * @param templateId - An in-app template
  */
-export async function transactional(orderId: string, applicationId: string, templateId: string) {
+export async function transactional(orderId: string) {
   const { jobId } = await brudcast.emails.send(
     {
       from: { name: 'Acme', address: 'orders@mail.acme.com' },
@@ -162,13 +160,6 @@ export async function transactional(orderId: string, applicationId: string, temp
   for await (const sms of brudcast.messages.list({ channel: 'sms', status: 'failed' })) {
     console.log(sms.recipient.maskedNumber, sms.category);
   }
-
-  await brudcast.inApp.messages.send({
-    applicationId,
-    externalId: 'user_123',
-    templateId,
-    mergeData: { firstName: 'Ada' },
-  });
 }
 
 /**
@@ -207,7 +198,7 @@ export async function forms(formId: string) {
 export async function webhookEndpoints() {
   const endpoint = await brudcast.webhookEndpoints.create({
     url: 'https://acme.com/webhooks/brudcast',
-    events: ['push.token_invalidated', 'voice.call.completed'],
+    events: ['push.token_invalidated'],
   });
   console.log('store this secret:', endpoint.secret);
 
