@@ -1,0 +1,1520 @@
+[
+  {
+    "method": "GET",
+    "path": "/sending-domains",
+    "scope": "domains:read",
+    "handler": "SendingDomain.index"
+  },
+  {
+    "method": "POST",
+    "path": "/sending-domains",
+    "scope": "domains:write",
+    "handler": "SendingDomain.store"
+  },
+  {
+    "method": "GET",
+    "path": "/sending-domains/:id",
+    "scope": "domains:read",
+    "handler": "SendingDomain.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/sending-domains/:id",
+    "scope": "domains:write",
+    "handler": "SendingDomain.update"
+  },
+  {
+    "method": "PATCH",
+    "path": "/sending-domains/:id/verify-dns-records",
+    "scope": "domains:write",
+    "handler": "SendingDomain.verifyDnsRecords"
+  },
+  {
+    "method": "POST",
+    "path": "/sending-domains/:id/verify-dns-records",
+    "scope": "domains:write",
+    "handler": "SendingDomain.verifyDnsRecords"
+  },
+  {
+    "method": "POST",
+    "path": "/sending-domains/:id/clear-queue",
+    "scope": "domains:write",
+    "handler": "SendingDomain.clearQueue"
+  },
+  {
+    "method": "DELETE",
+    "path": "/sending-domains/:id",
+    "scope": "domains:write",
+    "handler": "SendingDomain.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/sending-domains/:id/dkims",
+    "scope": "domains:read",
+    "handler": "SendingDomainDkim.index"
+  },
+  {
+    "method": "GET",
+    "path": "/sending-domains/:id/dkims/active",
+    "scope": "domains:read",
+    "handler": "SendingDomainDkim.showActive"
+  },
+  {
+    "method": "GET",
+    "path": "/sending-domains/:id/dkims/verify",
+    "scope": "domains:read",
+    "handler": "SendingDomainDkim.verify"
+  },
+  {
+    "method": "GET",
+    "path": "/mailboxes",
+    "scope": "mailboxes:read",
+    "handler": "Mailbox.organizationIndex"
+  },
+  {
+    "method": "GET",
+    "path": "/mailbox-domains",
+    "scope": "mailboxes:read",
+    "handler": "MailboxDomain.index"
+  },
+  {
+    "method": "POST",
+    "path": "/mailbox-domains",
+    "scope": "mailboxes:write",
+    "handler": "MailboxDomain.store"
+  },
+  {
+    "method": "GET",
+    "path": "/mailbox-domains/:id",
+    "scope": "mailboxes:read",
+    "handler": "MailboxDomain.show"
+  },
+  {
+    "method": "DELETE",
+    "path": "/mailbox-domains/:id",
+    "scope": "mailboxes:write",
+    "handler": "MailboxDomain.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/mailbox-domains/:id/dns-records",
+    "scope": "mailboxes:read",
+    "handler": "MailboxDomain.dnsRecords"
+  },
+  {
+    "method": "POST",
+    "path": "/mailbox-domains/:id/verify-dns-records",
+    "scope": "mailboxes:write",
+    "handler": "MailboxDomain.verifyDnsRecords"
+  },
+  {
+    "method": "GET",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes",
+    "scope": "mailboxes:read",
+    "handler": "Mailbox.index"
+  },
+  {
+    "method": "POST",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes",
+    "scope": "mailboxes:write",
+    "handler": "Mailbox.store"
+  },
+  {
+    "method": "GET",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes/:id",
+    "scope": "mailboxes:read",
+    "handler": "Mailbox.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes/:id",
+    "scope": "mailboxes:write",
+    "handler": "Mailbox.update"
+  },
+  {
+    "method": "POST",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes/:id/reset-password",
+    "scope": "mailboxes:write",
+    "handler": "Mailbox.resetPassword"
+  },
+  {
+    "method": "POST",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes/:id/suspend",
+    "scope": "mailboxes:write",
+    "handler": "Mailbox.suspend"
+  },
+  {
+    "method": "POST",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes/:id/unsuspend",
+    "scope": "mailboxes:write",
+    "handler": "Mailbox.unsuspend"
+  },
+  {
+    "method": "DELETE",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes/:id",
+    "scope": "mailboxes:write",
+    "handler": "Mailbox.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes/:mailboxId/aliases",
+    "scope": "mailboxes:read",
+    "handler": "MailboxAlias.index"
+  },
+  {
+    "method": "POST",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes/:mailboxId/aliases",
+    "scope": "mailboxes:write",
+    "handler": "MailboxAlias.store"
+  },
+  {
+    "method": "DELETE",
+    "path": "/mailbox-domains/:mailboxDomainId/mailboxes/:mailboxId/aliases/:id",
+    "scope": "mailboxes:write",
+    "handler": "MailboxAlias.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/ip-pools",
+    "scope": "domains:read",
+    "handler": "IpPool.index"
+  },
+  {
+    "method": "GET",
+    "path": "/ip-pools/:id",
+    "scope": "domains:read",
+    "handler": "IpPool.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/ip-pools/:id",
+    "scope": "domains:write",
+    "handler": "IpPool.update"
+  },
+  {
+    "method": "POST",
+    "path": "/sending-domains/:sendingDomainId/ip-pools/:poolId/assign",
+    "scope": "domains:write",
+    "handler": "IpPool.assign"
+  },
+  {
+    "method": "POST",
+    "path": "/sending-domains/:sendingDomainId/ip-pools/:poolId/unassign",
+    "scope": "domains:write",
+    "handler": "IpPool.unassign"
+  },
+  {
+    "method": "GET",
+    "path": "/sending-domains/:sendingDomainId/ip-pool-requests",
+    "scope": "domains:read",
+    "handler": "IpPoolRequest.index"
+  },
+  {
+    "method": "POST",
+    "path": "/sending-domains/:sendingDomainId/ip-pool-requests",
+    "scope": "domains:write",
+    "handler": "IpPoolRequest.store"
+  },
+  {
+    "method": "POST",
+    "path": "/ip-pool-requests/:id/cancel",
+    "scope": "domains:write",
+    "handler": "IpPoolRequest.cancel"
+  },
+  {
+    "method": "GET",
+    "path": "/sender-identities",
+    "scope": "senders:read",
+    "handler": "SenderIdentity.index"
+  },
+  {
+    "method": "POST",
+    "path": "/sender-identities",
+    "scope": "senders:write",
+    "handler": "SenderIdentity.store"
+  },
+  {
+    "method": "GET",
+    "path": "/sender-identities/:id",
+    "scope": "senders:read",
+    "handler": "SenderIdentity.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/sender-identities/:id",
+    "scope": "senders:write",
+    "handler": "SenderIdentity.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/sender-identities/:id",
+    "scope": "senders:write",
+    "handler": "SenderIdentity.destroy"
+  },
+  {
+    "method": "POST",
+    "path": "/sender-identities/:id/default",
+    "scope": "senders:write",
+    "handler": "SenderIdentity.setDefault"
+  },
+  {
+    "method": "GET",
+    "path": "/sender-identities/:id/provider-registrations",
+    "scope": "senders:read",
+    "handler": "SenderIdentity.providerRegistrations"
+  },
+  {
+    "method": "GET",
+    "path": "/push-applications",
+    "scope": "senders:read",
+    "handler": "PushApplication.index"
+  },
+  {
+    "method": "POST",
+    "path": "/push-applications",
+    "scope": "senders:write",
+    "handler": "PushApplication.store"
+  },
+  {
+    "method": "GET",
+    "path": "/push-applications/:id",
+    "scope": "senders:read",
+    "handler": "PushApplication.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/push-applications/:id",
+    "scope": "senders:write",
+    "handler": "PushApplication.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/push-applications/:id",
+    "scope": "senders:write",
+    "handler": "PushApplication.destroy"
+  },
+  {
+    "method": "POST",
+    "path": "/push-applications/:id/default",
+    "scope": "senders:write",
+    "handler": "PushApplication.setDefault"
+  },
+  {
+    "method": "POST",
+    "path": "/push-applications/:id/validate",
+    "scope": "senders:write",
+    "handler": "PushApplication.validate"
+  },
+  {
+    "method": "POST",
+    "path": "/push-applications/:id/credential",
+    "scope": "senders:write",
+    "handler": "PushApplication.rotateCredential"
+  },
+  {
+    "method": "POST",
+    "path": "/push-applications/:id/test-send",
+    "scope": "senders:write",
+    "handler": "PushApplication.testSend"
+  },
+  {
+    "method": "GET",
+    "path": "/in-app-applications",
+    "scope": "senders:read",
+    "handler": "InAppApplication.index"
+  },
+  {
+    "method": "POST",
+    "path": "/in-app-applications",
+    "scope": "senders:write",
+    "handler": "InAppApplication.store"
+  },
+  {
+    "method": "GET",
+    "path": "/in-app-applications/:id",
+    "scope": "senders:read",
+    "handler": "InAppApplication.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/in-app-applications/:id",
+    "scope": "senders:write",
+    "handler": "InAppApplication.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/in-app-applications/:id",
+    "scope": "senders:write",
+    "handler": "InAppApplication.destroy"
+  },
+  {
+    "method": "POST",
+    "path": "/in-app-applications/:id/rotate-secret",
+    "scope": "senders:write",
+    "handler": "InAppApplication.rotateSecret"
+  },
+  {
+    "method": "POST",
+    "path": "/in-app-applications/:id/rotate-key",
+    "scope": "senders:write",
+    "handler": "InAppApplication.rotateKey"
+  },
+  {
+    "method": "POST",
+    "path": "/in-app-applications/:id/revoke-previous-key",
+    "scope": "senders:write",
+    "handler": "InAppApplication.revokePreviousKey"
+  },
+  {
+    "method": "POST",
+    "path": "/in-app-applications/:id/test-send",
+    "scope": "senders:write",
+    "handler": "InAppMessage.testSend"
+  },
+  {
+    "method": "POST",
+    "path": "/in-app/messages",
+    "scope": "messages:send",
+    "handler": "InAppMessage.send"
+  },
+  {
+    "method": "GET",
+    "path": "/whatsapp/business-accounts",
+    "scope": "senders:read",
+    "handler": "WhatsappBusinessAccount.index"
+  },
+  {
+    "method": "GET",
+    "path": "/whatsapp/business-accounts/:id",
+    "scope": "senders:read",
+    "handler": "WhatsappBusinessAccount.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/whatsapp/business-accounts/:id",
+    "scope": "senders:write",
+    "handler": "WhatsappBusinessAccount.update"
+  },
+  {
+    "method": "POST",
+    "path": "/whatsapp/business-accounts/:id/validate",
+    "scope": "senders:write",
+    "handler": "WhatsappBusinessAccount.validate"
+  },
+  {
+    "method": "POST",
+    "path": "/whatsapp/business-accounts/:id/sync",
+    "scope": "senders:write",
+    "handler": "WhatsappBusinessAccount.sync"
+  },
+  {
+    "method": "DELETE",
+    "path": "/whatsapp/business-accounts/:id",
+    "scope": "senders:write",
+    "handler": "WhatsappBusinessAccount.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/whatsapp/phone-numbers",
+    "scope": "senders:read",
+    "handler": "WhatsappPhoneNumber.index"
+  },
+  {
+    "method": "GET",
+    "path": "/whatsapp/templates",
+    "scope": "templates:read",
+    "handler": "WhatsappTemplate.index"
+  },
+  {
+    "method": "GET",
+    "path": "/whatsapp/templates/:id",
+    "scope": "templates:read",
+    "handler": "WhatsappTemplate.show"
+  },
+  {
+    "method": "GET",
+    "path": "/webhook-endpoints",
+    "scope": "webhooks:read",
+    "handler": "WebhookEndpoint.index"
+  },
+  {
+    "method": "GET",
+    "path": "/webhook-endpoints/statistics",
+    "scope": "webhooks:read",
+    "handler": "WebhookEndpoint.statistics"
+  },
+  {
+    "method": "POST",
+    "path": "/webhook-endpoints",
+    "scope": "webhooks:write",
+    "handler": "WebhookEndpoint.store"
+  },
+  {
+    "method": "GET",
+    "path": "/webhook-endpoints/:id",
+    "scope": "webhooks:read",
+    "handler": "WebhookEndpoint.show"
+  },
+  {
+    "method": "POST",
+    "path": "/webhook-endpoints/:id/test",
+    "scope": "webhooks:write",
+    "handler": "WebhookEndpoint.test"
+  },
+  {
+    "method": "POST",
+    "path": "/webhook-endpoints/:id/regenerate-secret",
+    "scope": "webhooks:write",
+    "handler": "WebhookEndpoint.regenerateSecret"
+  },
+  {
+    "method": "PATCH",
+    "path": "/webhook-endpoints/:id",
+    "scope": "webhooks:write",
+    "handler": "WebhookEndpoint.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/webhook-endpoints/:id",
+    "scope": "webhooks:write",
+    "handler": "WebhookEndpoint.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/webhook-deliveries",
+    "scope": "webhooks:read",
+    "handler": "WebhookDelivery.index"
+  },
+  {
+    "method": "GET",
+    "path": "/webhook-deliveries/:id",
+    "scope": "webhooks:read",
+    "handler": "WebhookDelivery.show"
+  },
+  {
+    "method": "POST",
+    "path": "/webhook-deliveries/:id/retry",
+    "scope": "webhooks:write",
+    "handler": "WebhookDelivery.retry"
+  },
+  {
+    "method": "GET",
+    "path": "/contacts",
+    "scope": "contacts:read",
+    "handler": "Contact.index"
+  },
+  {
+    "method": "GET",
+    "path": "/contacts/statistics",
+    "scope": "contacts:read",
+    "handler": "Contact.statistics"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts",
+    "scope": "contacts:write",
+    "handler": "Contact.store"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts/bulk",
+    "scope": "contacts:write",
+    "handler": "Contact.bulkStore"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts/bulk-delete",
+    "scope": "contacts:write",
+    "handler": "Contact.bulkDelete"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts/bulk-archive",
+    "scope": "contacts:write",
+    "handler": "Contact.bulkArchive"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts/bulk-add-to-list",
+    "scope": "contacts:write",
+    "handler": "Contact.bulkAddToList"
+  },
+  {
+    "method": "GET",
+    "path": "/contacts/:id/activity",
+    "scope": "contacts:read",
+    "handler": "Contact.activity"
+  },
+  {
+    "method": "GET",
+    "path": "/contacts/:id",
+    "scope": "contacts:read",
+    "handler": "Contact.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contacts/:id",
+    "scope": "contacts:write",
+    "handler": "Contact.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contacts/:id",
+    "scope": "contacts:write",
+    "handler": "Contact.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-lists",
+    "scope": "contacts:read",
+    "handler": "ContactList.index"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-lists/statistics",
+    "scope": "contacts:read",
+    "handler": "ContactList.statistics"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-lists",
+    "scope": "contacts:write",
+    "handler": "ContactList.store"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-lists/:id",
+    "scope": "contacts:read",
+    "handler": "ContactList.show"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-lists/:id/contacts",
+    "scope": "contacts:read",
+    "handler": "ContactList.listMembers"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contact-lists/:id",
+    "scope": "contacts:write",
+    "handler": "ContactList.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contact-lists/:id",
+    "scope": "contacts:write",
+    "handler": "ContactList.destroy"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-lists/:id/contacts",
+    "scope": "contacts:write",
+    "handler": "ContactList.addContacts"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-lists/:id/contacts/remove",
+    "scope": "contacts:write",
+    "handler": "ContactList.removeContacts"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-lists/bulk-operation",
+    "scope": "contacts:write",
+    "handler": "ContactList.bulkOperation"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts/:contactId/emails",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.addEmail"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contacts/:contactId/emails/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.updateEmail"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contacts/:contactId/emails/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.removeEmail"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts/:contactId/sms",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.addSms"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contacts/:contactId/sms/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.updateSms"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contacts/:contactId/sms/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.removeSms"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts/:contactId/whatsapp",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.addWhatsapp"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contacts/:contactId/whatsapp/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.updateWhatsapp"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contacts/:contactId/whatsapp/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.removeWhatsapp"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts/:contactId/telegram",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.addTelegram"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contacts/:contactId/telegram/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.updateTelegram"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contacts/:contactId/telegram/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.removeTelegram"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts/:contactId/imessage",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.addImessage"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contacts/:contactId/imessage/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.updateImessage"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contacts/:contactId/imessage/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.removeImessage"
+  },
+  {
+    "method": "POST",
+    "path": "/contacts/:contactId/push-notifications",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.addPushNotification"
+  },
+  {
+    "method": "GET",
+    "path": "/contacts/:contactId/in-app-identities",
+    "scope": "contacts:read",
+    "handler": "ContactInAppIdentity.index"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contacts/:contactId/push-notifications/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.updatePushNotification"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contacts/:contactId/push-notifications/:channelId",
+    "scope": "contacts:write",
+    "handler": "CommunicationChannel.removePushNotification"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-tags",
+    "scope": "contacts:read",
+    "handler": "ContactTag.index"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-tags/all",
+    "scope": "contacts:read",
+    "handler": "ContactTag.all"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-tags",
+    "scope": "contacts:write",
+    "handler": "ContactTag.store"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contact-tags/:id",
+    "scope": "contacts:write",
+    "handler": "ContactTag.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contact-tags/:id",
+    "scope": "contacts:write",
+    "handler": "ContactTag.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-custom-fields",
+    "scope": "contacts:read",
+    "handler": "ContactCustomField.index"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-custom-fields/all",
+    "scope": "contacts:read",
+    "handler": "ContactCustomField.all"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-custom-fields",
+    "scope": "contacts:write",
+    "handler": "ContactCustomField.store"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contact-custom-fields/:id",
+    "scope": "contacts:write",
+    "handler": "ContactCustomField.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contact-custom-fields/:id",
+    "scope": "contacts:write",
+    "handler": "ContactCustomField.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-segments",
+    "scope": "contacts:read",
+    "handler": "ContactSegment.index"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-segments/statistics",
+    "scope": "contacts:read",
+    "handler": "ContactSegment.statistics"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-segments",
+    "scope": "contacts:write",
+    "handler": "ContactSegment.store"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-segments/preview-count",
+    "scope": "contacts:write",
+    "handler": "ContactSegment.previewCount"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-segments/:id",
+    "scope": "contacts:read",
+    "handler": "ContactSegment.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contact-segments/:id",
+    "scope": "contacts:write",
+    "handler": "ContactSegment.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contact-segments/:id",
+    "scope": "contacts:write",
+    "handler": "ContactSegment.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-segments/:id/contacts",
+    "scope": "contacts:read",
+    "handler": "ContactSegment.listContacts"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-segments/:id/contacts",
+    "scope": "contacts:write",
+    "handler": "ContactSegment.addContacts"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-segments/:id/contacts/remove",
+    "scope": "contacts:write",
+    "handler": "ContactSegment.removeContacts"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-segments/:id/snapshot",
+    "scope": "contacts:write",
+    "handler": "ContactSegment.snapshot"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-segments/:id/convert",
+    "scope": "contacts:write",
+    "handler": "ContactSegment.convert"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-segments/:id/refresh",
+    "scope": "contacts:write",
+    "handler": "ContactSegment.refresh"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-segments/:id/refresh-count",
+    "scope": "contacts:write",
+    "handler": "ContactSegment.refreshCount"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-imports/upload",
+    "scope": "contacts:write",
+    "handler": "ContactImport.upload"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-imports",
+    "scope": "contacts:write",
+    "handler": "ContactImport.store"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-imports",
+    "scope": "contacts:read",
+    "handler": "ContactImport.index"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-imports/:id",
+    "scope": "contacts:read",
+    "handler": "ContactImport.show"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-imports/:id/preview",
+    "scope": "contacts:write",
+    "handler": "ContactImport.preview"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-imports/:id/errors",
+    "scope": "contacts:read",
+    "handler": "ContactImport.errors"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-exports",
+    "scope": "contacts:write",
+    "handler": "ContactExport.store"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-exports",
+    "scope": "contacts:read",
+    "handler": "ContactExport.index"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-exports/:id",
+    "scope": "contacts:read",
+    "handler": "ContactExport.show"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-exports/:id/download",
+    "scope": "contacts:read",
+    "handler": "ContactExport.download"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms",
+    "scope": "forms:read",
+    "handler": "ContactForm.index"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/statistics",
+    "scope": "forms:read",
+    "handler": "ContactForm.statistics"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-forms",
+    "scope": "forms:write",
+    "handler": "ContactForm.store"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/:formId",
+    "scope": "forms:read",
+    "handler": "ContactForm.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contact-forms/:formId",
+    "scope": "forms:write",
+    "handler": "ContactForm.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contact-forms/:formId",
+    "scope": "forms:write",
+    "handler": "ContactForm.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/:formId/analytics",
+    "scope": "forms:read",
+    "handler": "ContactForm.analytics"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/:formId/schema",
+    "scope": "forms:read",
+    "handler": "ContactForm.schema"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/:formId/readiness",
+    "scope": "forms:read",
+    "handler": "ContactFormAction.readiness"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-forms/:formId/publish",
+    "scope": "forms:write",
+    "handler": "ContactFormAction.publish"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-forms/:formId/unpublish",
+    "scope": "forms:write",
+    "handler": "ContactFormAction.unpublish"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-forms/:formId/duplicate",
+    "scope": "forms:write",
+    "handler": "ContactFormAction.duplicate"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/:formId/fields",
+    "scope": "forms:read",
+    "handler": "ContactFormField.index"
+  },
+  {
+    "method": "PUT",
+    "path": "/contact-forms/:formId/fields",
+    "scope": "forms:write",
+    "handler": "ContactFormField.replace"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/:formId/submissions",
+    "scope": "form_submissions:read",
+    "handler": "ContactFormSubmission.index"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-forms/:formId/submissions",
+    "scope": "form_submissions:write",
+    "handler": "ContactFormSubmission.store"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-forms/:formId/submissions/:submissionId/resend",
+    "scope": "form_submissions:write",
+    "handler": "ContactFormSubmission.resend"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contact-forms/:formId/submissions/:submissionId",
+    "scope": "form_submissions:write",
+    "handler": "ContactFormSubmission.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/:formId/uploads/:uploadId/download-url",
+    "scope": "form_submissions:read",
+    "handler": "ContactFormSubmission.downloadUrl"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/:formId/placements",
+    "scope": "forms:read",
+    "handler": "ContactFormPlacement.index"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-forms/:formId/placements",
+    "scope": "forms:write",
+    "handler": "ContactFormPlacement.store"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/:formId/placements/:placementId",
+    "scope": "forms:read",
+    "handler": "ContactFormPlacement.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/contact-forms/:formId/placements/:placementId",
+    "scope": "forms:write",
+    "handler": "ContactFormPlacement.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/contact-forms/:formId/placements/:placementId",
+    "scope": "forms:write",
+    "handler": "ContactFormPlacement.destroy"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-forms/:formId/placements/:placementId/publish",
+    "scope": "forms:write",
+    "handler": "ContactFormPlacement.publish"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-forms/:formId/placements/:placementId/pause",
+    "scope": "forms:write",
+    "handler": "ContactFormPlacement.pause"
+  },
+  {
+    "method": "POST",
+    "path": "/contact-forms/:formId/placements/:placementId/variant",
+    "scope": "forms:write",
+    "handler": "ContactFormPlacement.variant"
+  },
+  {
+    "method": "GET",
+    "path": "/contact-forms/:formId/placements/:placementId/analytics",
+    "scope": "forms:read",
+    "handler": "ContactFormPlacement.analytics"
+  },
+  {
+    "method": "GET",
+    "path": "/websites",
+    "scope": "forms:read",
+    "handler": "Website.index"
+  },
+  {
+    "method": "POST",
+    "path": "/websites",
+    "scope": "forms:write",
+    "handler": "Website.store"
+  },
+  {
+    "method": "GET",
+    "path": "/websites/:websiteId",
+    "scope": "forms:read",
+    "handler": "Website.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/websites/:websiteId",
+    "scope": "forms:write",
+    "handler": "Website.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/websites/:websiteId",
+    "scope": "forms:write",
+    "handler": "Website.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/preference-center",
+    "scope": "forms:read",
+    "handler": "PreferenceCenter.show"
+  },
+  {
+    "method": "PUT",
+    "path": "/preference-center",
+    "scope": "forms:write",
+    "handler": "PreferenceCenter.update"
+  },
+  {
+    "method": "GET",
+    "path": "/contacts/:contactId/consent-records",
+    "scope": "contacts:read",
+    "handler": "ContactConsentRecord.index"
+  },
+  {
+    "method": "GET",
+    "path": "/suppressions",
+    "scope": "contacts:read",
+    "handler": "Suppression.index"
+  },
+  {
+    "method": "POST",
+    "path": "/suppressions",
+    "scope": "contacts:write",
+    "handler": "Suppression.store"
+  },
+  {
+    "method": "DELETE",
+    "path": "/suppressions/:id",
+    "scope": "contacts:write",
+    "handler": "Suppression.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns",
+    "scope": "campaigns:read",
+    "handler": "Campaign.index"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/statistics",
+    "scope": "campaigns:read",
+    "handler": "Campaign.statistics"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns",
+    "scope": "campaigns:write",
+    "handler": "Campaign.store"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/bulk-delete",
+    "scope": "campaigns:write",
+    "handler": "Campaign.bulkDelete"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/bulk-archive",
+    "scope": "campaigns:write",
+    "handler": "Campaign.bulkArchive"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/estimate-recipients",
+    "scope": "campaigns:write",
+    "handler": "Campaign.estimateRecipients"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/ai/preview-text",
+    "scope": "campaigns:write",
+    "handler": "CampaignAi.generatePreviewText"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/ai/generate",
+    "scope": "campaigns:write",
+    "handler": "CampaignAi.generateContent"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/ai/design",
+    "scope": "campaigns:write",
+    "handler": "CampaignAi.generateDesign"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/ai/design-reference",
+    "scope": "campaigns:write",
+    "handler": "CampaignAi.inspectDesignReference"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/ai/house-style",
+    "scope": "campaigns:read",
+    "handler": "CampaignAi.houseStyle"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/ai/copy",
+    "scope": "campaigns:write",
+    "handler": "CampaignAi.generateCopy"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/ai/block-design",
+    "scope": "campaigns:write",
+    "handler": "CampaignAi.generateBlockDesign"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/ai/name",
+    "scope": "campaigns:write",
+    "handler": "CampaignAi.generateName"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/ai/sms",
+    "scope": "campaigns:write",
+    "handler": "CampaignAi.generateSms"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/reports/overview",
+    "scope": "campaigns:read",
+    "handler": "CampaignReport.reportsOverview"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/reports/trends",
+    "scope": "campaigns:read",
+    "handler": "CampaignReport.reportsTrends"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/reports/performance",
+    "scope": "campaigns:read",
+    "handler": "CampaignReport.reportsPerformance"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/:id/report/recipients",
+    "scope": "campaigns:read",
+    "handler": "CampaignReport.recipients"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/:id/report/journey",
+    "scope": "campaigns:read",
+    "handler": "CampaignReport.journey"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/:id/report/answers",
+    "scope": "campaigns:read",
+    "handler": "CampaignReport.answers"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/:id",
+    "scope": "campaigns:read",
+    "handler": "Campaign.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/campaigns/:id",
+    "scope": "campaigns:write",
+    "handler": "Campaign.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/campaigns/:id",
+    "scope": "campaigns:write",
+    "handler": "Campaign.destroy"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/:id/readiness",
+    "scope": "campaigns:read",
+    "handler": "CampaignAction.readiness"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/:id/credit-estimate",
+    "scope": "campaigns:read",
+    "handler": "CampaignAction.creditEstimate"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/:id/send",
+    "scope": "campaigns:write",
+    "handler": "CampaignAction.send"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/:id/pause",
+    "scope": "campaigns:write",
+    "handler": "CampaignAction.pause"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/:id/resume",
+    "scope": "campaigns:write",
+    "handler": "CampaignAction.resume"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/:id/cancel",
+    "scope": "campaigns:write",
+    "handler": "CampaignAction.cancel"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/:id/duplicate",
+    "scope": "campaigns:write",
+    "handler": "CampaignAction.duplicate"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/:id/preview",
+    "scope": "campaigns:write",
+    "handler": "CampaignAction.preview"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/:id/preview/whatsapp",
+    "scope": "campaigns:write",
+    "handler": "CampaignAction.previewWhatsapp"
+  },
+  {
+    "method": "POST",
+    "path": "/campaigns/:id/test-send",
+    "scope": "campaigns:write",
+    "handler": "CampaignAction.testSend"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/:id/recipients",
+    "scope": "campaigns:read",
+    "handler": "Campaign.listRecipients"
+  },
+  {
+    "method": "GET",
+    "path": "/campaigns/:id/statistics",
+    "scope": "campaigns:read",
+    "handler": "CampaignReport.showStatistics"
+  },
+  {
+    "method": "GET",
+    "path": "/templates",
+    "scope": "templates:read",
+    "handler": "Template.index"
+  },
+  {
+    "method": "POST",
+    "path": "/templates",
+    "scope": "templates:write",
+    "handler": "Template.store"
+  },
+  {
+    "method": "GET",
+    "path": "/templates/:id",
+    "scope": "templates:read",
+    "handler": "Template.show"
+  },
+  {
+    "method": "PATCH",
+    "path": "/templates/:id",
+    "scope": "templates:write",
+    "handler": "Template.update"
+  },
+  {
+    "method": "DELETE",
+    "path": "/templates/:id",
+    "scope": "templates:write",
+    "handler": "Template.destroy"
+  },
+  {
+    "method": "POST",
+    "path": "/templates/:id/duplicate",
+    "scope": "templates:write",
+    "handler": "Template.duplicate"
+  },
+  {
+    "method": "POST",
+    "path": "/templates/:id/resolve",
+    "scope": "templates:write",
+    "handler": "Template.resolve"
+  },
+  {
+    "method": "GET",
+    "path": "/messages",
+    "scope": "messages:read",
+    "handler": "Message.index"
+  },
+  {
+    "method": "GET",
+    "path": "/messages/:jobId",
+    "scope": "messages:read",
+    "handler": "Message.show"
+  },
+  {
+    "method": "GET",
+    "path": "/dashboard/stats",
+    "scope": "analytics:read",
+    "handler": "Dashboard.stats"
+  },
+  {
+    "method": "GET",
+    "path": "/dashboard/overview",
+    "scope": "analytics:read",
+    "handler": "Dashboard.overview"
+  },
+  {
+    "method": "GET",
+    "path": "/reports/overview",
+    "scope": "analytics:read",
+    "handler": "Report.overview"
+  },
+  {
+    "method": "GET",
+    "path": "/reports/engagement",
+    "scope": "analytics:read",
+    "handler": "Report.engagement"
+  },
+  {
+    "method": "GET",
+    "path": "/reports/deliverability",
+    "scope": "analytics:read",
+    "handler": "Report.deliverability"
+  },
+  {
+    "method": "GET",
+    "path": "/reports/channel-performance",
+    "scope": "analytics:read",
+    "handler": "Report.channelPerformance"
+  },
+  {
+    "method": "GET",
+    "path": "/reports/bounce-classification",
+    "scope": "analytics:read",
+    "handler": "Message.bounceClassification"
+  },
+  {
+    "method": "GET",
+    "path": "/reports/revenue-attribution",
+    "scope": "analytics:read",
+    "handler": "Report.revenueAttribution"
+  },
+  {
+    "method": "POST",
+    "path": "/reports/exports",
+    "scope": "analytics:write",
+    "handler": "ReportExport.store"
+  },
+  {
+    "method": "GET",
+    "path": "/reports/exports",
+    "scope": "analytics:read",
+    "handler": "ReportExport.index"
+  },
+  {
+    "method": "GET",
+    "path": "/reports/exports/:id",
+    "scope": "analytics:read",
+    "handler": "ReportExport.show"
+  },
+  {
+    "method": "GET",
+    "path": "/reports/exports/:id/download",
+    "scope": "analytics:read",
+    "handler": "ReportExport.download"
+  }
+]

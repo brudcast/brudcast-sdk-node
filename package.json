@@ -1,0 +1,94 @@
+{
+  "name": "@brudcast/node",
+  "version": "0.0.0",
+  "description": "The official Node.js library for the Brudcast API",
+  "license": "MIT",
+  "author": "Brudcast Limited",
+  "keywords": [
+    "brudcast",
+    "api",
+    "sdk",
+    "email",
+    "sms",
+    "push",
+    "contacts",
+    "campaigns",
+    "webhooks"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./webhooks": {
+      "import": {
+        "types": "./dist/webhooks.d.ts",
+        "default": "./dist/webhooks.js"
+      },
+      "require": {
+        "types": "./dist/webhooks.d.cts",
+        "default": "./dist/webhooks.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:contract": "vitest run --config vitest.contract.config.ts",
+    "test:dist": "node tests/dist/cjs.cjs && node tests/dist/esm.mjs",
+    "check:package": "publint --strict && attw --pack . --profile node16",
+    "check:routes": "node scripts/sync-routes.mjs --check",
+    "sync:routes": "node scripts/sync-routes.mjs",
+    "prepublishOnly": "npm run build && npm run test:dist && npm run check:package"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^20.19.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "eslint": "^10.11.0",
+    "prettier": "^3.9.9",
+    "publint": "^0.3.24",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^4.1.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brudcast/brudcast-sdk-node.git"
+  },
+  "homepage": "https://github.com/brudcast/brudcast-sdk-node#readme",
+  "bugs": {
+    "url": "https://github.com/brudcast/brudcast-sdk-node/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
