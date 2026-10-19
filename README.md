@@ -1,13 +1,31 @@
 # Brudcast Node.js library
 
-The official server-side library for the [Brudcast](https://brudcast.com) API:
-contacts and audiences, campaigns on every channel, transactional email and
-in-app messages, delivery logs and reports, sending infrastructure, forms, and
-webhook verification.
+[![npm](https://img.shields.io/npm/v/@brudcast/node)](https://www.npmjs.com/package/@brudcast/node)
 
-- TypeScript types for every request and reply
+The official server-side library for the [Brudcast](https://brudcast.com) API.
+Everything your organization does in the Brudcast dashboard, from your own code:
+
+- **Audience**: contacts on six channels, lists, rule-based segments, tags,
+  custom fields, CSV imports and exports, consent records and suppressions.
+- **Campaigns**: email, SMS, WhatsApp, push, voice and in-app, with A/B tests,
+  readiness checks, credit estimates, scheduling, previews and test sends.
+- **Transactional messaging**: email through the send API, in-app messages, and
+  the delivery log of every email, SMS and voice call.
+- **Analytics**: campaign reports, engagement, deliverability, channel
+  performance, revenue attribution, bounce classification and report exports.
+- **Sending setup**: sending domains with DNS and DKIM checks, dedicated IP
+  pools, sender identities, push and in-app applications, WhatsApp accounts and
+  templates, and hosted mailboxes.
+- **Forms**: signup forms and pages, their fields, submissions, popup
+  placements, websites and the preference center.
+- **Webhooks**: manage endpoints, retry deliveries, and verify signatures.
+
+Built for production use:
+
+- TypeScript types for every request and reply, taken from the API's own models
 - Automatic pagination with `for await`
-- Safe automatic retries, with idempotency keys on every `POST`
+- Safe automatic retries, with an idempotency key on every `POST`
+- Typed errors carrying the API's error code and request id
 - No runtime dependencies; Node.js 20 and later, Bun and Deno
 
 ## Install
@@ -16,23 +34,7 @@ webhook verification.
 npm install @brudcast/node
 ```
 
-## Keys
-
-The library takes two credentials, both from the Brudcast dashboard:
-
-| Option       | Environment variable   | Used for                                   |
-| ------------ | ---------------------- | ------------------------------------------ |
-| `apiKey`     | `BRUDCAST_API_KEY`     | Everything except sending email (`bk_...`) |
-| `sendingKey` | `BRUDCAST_SENDING_KEY` | `emails.send`, for one sending domain      |
-
-An API key only reaches what its scopes allow; a call outside them fails with
-`InsufficientScopeError`, which names the scope to add. Billing, wallet and API
-key management stay in the dashboard and are not part of this library.
-
-The client runs on your server only: it refuses to start in a browser, where it
-would expose your key.
-
-## Usage
+## Quick start
 
 ```ts
 import Brudcast from '@brudcast/node';
@@ -48,30 +50,263 @@ const contact = await brudcast.contacts.create({
 });
 
 await brudcast.contactLists.contacts.add(listId, { contactIds: [contact.id] });
-
-const campaign = await brudcast.campaigns.retrieve(campaignId);
-await brudcast.campaigns.send(campaign.id, { sendOption: 'now' });
 ```
 
-### Sending email
+The library takes two credentials, both from the Brudcast dashboard:
+
+| Option       | Environment variable   | Used for                                   |
+| ------------ | ---------------------- | ------------------------------------------ |
+| `apiKey`     | `BRUDCAST_API_KEY`     | Everything except sending email (`bk_...`) |
+| `sendingKey` | `BRUDCAST_SENDING_KEY` | `emails.send`, for one sending domain      |
+
+An API key only reaches what its scopes allow (see
+[What you can do](#what-you-can-do)); a call outside them fails with
+`InsufficientScopeError`, which names the scope to add. Billing, the wallet and
+API key management stay in the dashboard.
+
+The client runs on your server only: it refuses to start in a browser, where it
+would expose your key.
+
+## What you can do
+
+Every endpoint an organization API key can reach has a method. Each area needs
+its `read` scope to read and its `write` scope to change.
+
+| Area                | Client properties                                                       | Highlights                                                                                                                                                                                                             | Scopes             |
+| ------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| Contacts            | `contacts`                                                              | create, update, bulk create, delete, archive and add to list; activity timeline; statistics; `emails`, `sms`, `whatsapp`, `telegram`, `imessage` and `pushNotifications` channels; `consentRecords`; `inAppIdentities` | `contacts`         |
+| Audiences           | `contactLists`, `contactSegments`, `contactTags`, `contactCustomFields` | list membership and bulk operations; dynamic and static segments with preview counts, snapshots and refresh                                                                                                            | `contacts`         |
+| Imports and exports | `contactImports`, `contactExports`                                      | CSV upload with suggested mappings, dry-run preview, error report; exports with a download link                                                                                                                        | `contacts`         |
+| Suppressions        | `suppressions`                                                          | add, list and lift suppressed addresses                                                                                                                                                                                | `contacts`         |
+| Campaigns           | `campaigns`, `campaigns.reports`                                        | six channels, A/B tests, recipient estimates, readiness, credit estimate, send or schedule, pause, resume, cancel, duplicate, preview, test send; statistics, journeys, voice answers, trends and performance          | `campaigns`        |
+| Templates           | `templates`, `whatsapp.templates`                                       | reusable content with placeholders, resolve, duplicate; approved WhatsApp templates                                                                                                                                    | `templates`        |
+| Transactional       | `emails`, `inApp.messages`, `messages`                                  | send email (sending key) and in-app messages; delivery logs for email, SMS and voice                                                                                                                                   | `messages`         |
+| Analytics           | `reports`, `reports.exports`, `dashboard`                               | overview, engagement, deliverability, channel performance, revenue attribution, bounce classification; CSV and PDF exports                                                                                             | `analytics`        |
+| Webhooks            | `webhookEndpoints`, `webhookDeliveries`                                 | endpoints, test events, secret rotation, delivery log and retry                                                                                                                                                        | `webhooks`         |
+| Sending domains     | `sendingDomains`, `ipPools`, `ipPoolRequests`                           | DNS records and verification, DKIM, tracking settings; dedicated IP pools and requests                                                                                                                                 | `domains`          |
+| Senders and apps    | `senderIdentities`, `pushApplications`, `inAppApplications`, `whatsapp` | sender addresses, SMS sender IDs and their coverage; push apps with credential rotation and test sends; in-app apps with key and secret rotation; WhatsApp accounts and numbers                                        | `senders`          |
+| Mailboxes           | `mailboxDomains`, `mailboxes`                                           | mail domains, mailboxes, aliases, password resets, suspension                                                                                                                                                          | `mailboxes`        |
+| Forms               | `contactForms`, `websites`, `preferenceCenter`                          | forms and pages, fields, publish, analytics, popup placements, websites, preference center settings                                                                                                                    | `forms`            |
+| Form submissions    | `contactForms.submissions`, `contactForms.uploads`                      | submit from your server, list, resend confirmation, download uploads                                                                                                                                                   | `form_submissions` |
+
+## A tour
+
+Each example is checked against the library's types in
+[`examples/readme-tour.ts`](examples/readme-tour.ts).
+
+### Contacts and lists
+
+```ts
+const contact = await brudcast.contacts.create({
+  firstName: 'Ada',
+  emails: [{ email: 'ada@example.com', isPrimary: true }],
+  smsNumbers: [{ phoneNumber: '8031234567', countryCode: '234' }],
+  tags: ['signup-2026'],
+  customFields: { plan: 'pro' },
+});
+
+await brudcast.contactLists.contacts.add(listId, { contactIds: [contact.id] });
+await brudcast.contacts.update(contact.id, {
+  language: 'en',
+  timezone: 'Africa/Lagos',
+});
+
+for await (const event of brudcast.contacts.activity(contact.id)) {
+  console.log(event.type, event.campaignName, event.occurredAt);
+}
+```
+
+### Segments
+
+```ts
+const rules = [
+  { field: 'tag', operator: 'is', value: 'vip' },
+  { field: 'last_activity', operator: 'in_last', value: 30 },
+] as const;
+
+const { contactCount } = await brudcast.contactSegments.previewCount({
+  matchMode: 'all',
+  rules: [...rules],
+});
+
+const segment = await brudcast.contactSegments.create({
+  name: 'Engaged VIPs',
+  type: 'dynamic',
+  matchMode: 'all',
+  rules: [...rules],
+});
+
+for await (const member of brudcast.contactSegments.contacts.list(segment.id)) {
+  console.log(member.id);
+}
+```
+
+### Importing a CSV
+
+```ts
+import { createReadStream } from 'node:fs';
+
+const upload = await brudcast.contactImports.upload(
+  createReadStream('customers.csv'),
+);
+
+const preview = await brudcast.contactImports.preview(upload.id, {
+  fieldMappings: upload.suggestedMappings,
+  duplicateHandling: 'update',
+});
+console.log(`${preview.newCount} new, ${preview.duplicateCount} to update`);
+
+const run = await brudcast.contactImports.create({
+  uploadId: upload.id,
+  fieldMappings: upload.suggestedMappings,
+  duplicateHandling: 'update',
+  listName: 'Customers',
+  consentConfirmed: true,
+});
+
+const { status } = await brudcast.contactImports.retrieve(run.id);
+```
+
+### Campaigns
+
+```ts
+const campaign = await brudcast.campaigns.create({
+  name: 'October newsletter',
+  type: 'regular',
+  channels: ['email', 'sms'],
+  recipients: { segmentIds: [segment.id] },
+  emailContent: {
+    fromName: 'Acme',
+    fromEmail: 'news@mail.acme.com',
+    subject: 'What is new in October',
+    htmlContent: '<h1>Hello {{first_name}}</h1>',
+    editorMode: 'html',
+  },
+  smsContent: {
+    body: 'Our October picks are live: acme.com/oct',
+    senderId: 'ACME',
+  },
+});
+
+const readiness = await brudcast.campaigns.readiness(campaign.id);
+if (!readiness.sendable) {
+  console.log(readiness.requirements.map((requirement) => requirement.message));
+}
+
+const cost = await brudcast.campaigns.creditEstimate(campaign.id);
+if (readiness.sendable && cost.sufficient) {
+  await brudcast.campaigns.send(campaign.id, {
+    sendOption: 'schedule',
+    scheduledAt: '2026-10-24T09:00:00Z',
+  });
+}
+```
+
+### Reporting
+
+```ts
+const stats = await brudcast.campaigns.reports.statistics(campaign.id);
+console.log(stats.delivered, stats.openRate, stats.clickRate);
+
+for await (const row of brudcast.campaigns.reports.performance({
+  from: '2026-10-01',
+})) {
+  console.log(row.name, row.openRate);
+}
+
+const deliverability = await brudcast.reports.deliverability({
+  from: '2026-10-01',
+  to: '2026-10-31',
+});
+console.log(
+  deliverability.kpis.bounceRate,
+  deliverability.kpis.blacklistStatus,
+);
+```
+
+### Transactional email, in-app messages and delivery logs
 
 ```ts
 const { jobId } = await brudcast.emails.send(
   {
     from: { name: 'Acme', address: 'orders@mail.acme.com' },
     to: [{ address: 'ada@example.com' }],
-    subject: 'Your order is confirmed',
+    subject: `Order ${order.id} confirmed`,
     html: '<p>Thanks for your order.</p>',
   },
   { idempotencyKey: `order-confirmation-${order.id}` },
 );
 
 const message = await brudcast.messages.retrieve(jobId);
+console.log(message.deliveryAttempts.map((attempt) => attempt.status));
+
+for await (const sms of brudcast.messages.list({
+  channel: 'sms',
+  status: 'failed',
+})) {
+  console.log(sms.recipient.maskedNumber, sms.category);
+}
+
+await brudcast.inApp.messages.send({
+  applicationId,
+  externalId: 'user_123',
+  templateId,
+  mergeData: { firstName: 'Ada' },
+});
 ```
 
 Pass an `idempotencyKey` you store with the message: if your process crashes or
 times out after sending, retrying with the same key returns the first result
 instead of sending twice. Keys are honoured for 24 hours.
+
+### Sending domains
+
+```ts
+const domain = await brudcast.sendingDomains.create({
+  domain: 'mail.acme.com',
+});
+
+for (const record of domain.domainDnsRecords ?? []) {
+  console.log(record.type, record.name, record.value); // publish these at your DNS host
+}
+
+await brudcast.sendingDomains.verifyDnsRecords(domain.id);
+const dkim = await brudcast.sendingDomains.dkims.verify(domain.id);
+```
+
+### Form submissions from your server
+
+```ts
+const schema = await brudcast.contactForms.schema(formId);
+console.log(schema.fields.map((field) => field.key));
+
+await brudcast.contactForms.submissions.create(formId, {
+  values: {
+    email: 'ada@example.com',
+    first_name: 'Ada',
+    interests: ['product', 'events'],
+  },
+  context: { ipAddress: '203.0.113.7' },
+});
+```
+
+### Webhook endpoints
+
+```ts
+const endpoint = await brudcast.webhookEndpoints.create({
+  url: 'https://acme.com/webhooks/brudcast',
+  events: ['push.token_invalidated', 'voice.call.completed'],
+});
+console.log('store this secret:', endpoint.secret);
+
+for await (const delivery of brudcast.webhookDeliveries.list({
+  status: ['failed'],
+})) {
+  await brudcast.webhookDeliveries.retry(delivery.id);
+}
+```
+
+## Library behaviour
 
 ### Pagination
 
@@ -166,23 +401,11 @@ response.headers.get('x-request-id');
 
 ### Uploads and downloads
 
-```ts
-import { createReadStream } from 'node:fs';
-
-const upload = await brudcast.contactImports.upload(
-  createReadStream('people.csv'),
-);
-const preview = await brudcast.contactImports.preview(upload.id, {
-  fieldMappings: upload.suggestedMappings,
-  duplicateHandling: 'update',
-});
-```
-
 Uploads take a `File`, `Blob`, `Buffer`, `Uint8Array` or stream. Export
 downloads (`contactExports.download`, `reports.exports.download`) return a
 short-lived signed `url` to fetch without an `Authorization` header.
 
-## Webhooks
+### Verifying webhooks
 
 Verify deliveries with the `webhooks` entry point, against the raw request body:
 
@@ -215,7 +438,7 @@ changes it). A body parsed by `express.json()` can never match its signature;
 the library says so when it is given one. Use `event.delivery_id` to drop
 duplicate deliveries.
 
-## Configuration
+### Configuration
 
 | Option                    | Default                                 |
 | ------------------------- | --------------------------------------- |
@@ -229,24 +452,19 @@ duplicate deliveries.
 | `fetch`                   | the global `fetch`                      |
 | `dangerouslyAllowBrowser` | `false`                                 |
 
-## Resources
-
-`contacts` (with `emails`, `sms`, `whatsapp`, `telegram`, `imessage`,
-`pushNotifications`, `consentRecords`, `inAppIdentities`), `contactLists`,
-`contactTags`, `contactCustomFields`, `contactSegments`, `contactImports`,
-`contactExports`, `suppressions`, `emails`, `campaigns` (with `reports`),
-`templates`, `messages`, `inApp.messages`, `webhookEndpoints`,
-`webhookDeliveries`, `reports` (with `exports`), `dashboard`, `sendingDomains`
-(with `dkims`), `ipPools`, `ipPoolRequests`, `senderIdentities`,
-`pushApplications`, `inAppApplications`, `whatsapp` (`businessAccounts`,
-`phoneNumbers`, `templates`), `mailboxDomains` (with `mailboxes`, `aliases`),
-`mailboxes`, `contactForms` (with `fields`, `submissions`, `uploads`,
-`placements`), `websites` and `preferenceCenter`.
-
 ## Requirements
 
 Node.js 20 or later. Bun and Deno work too; the `webhooks` entry point uses
 `node:crypto`.
+
+## Documentation
+
+The guide at [docs.brudcast.com/developers/nodejs-library][guide] walks through
+setup, and the [API reference][reference] documents every endpoint the library
+calls.
+
+[guide]: https://docs.brudcast.com/developers/nodejs-library
+[reference]: https://docs.brudcast.com/api-reference/introduction
 
 ## License
 
